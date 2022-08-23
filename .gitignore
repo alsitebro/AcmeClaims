@@ -15,5 +15,4 @@ buildspec.yml
 deploy.ps1
 DOCKERFILE
 .dockerignore
-customers.json
 !appsettings.example.json
