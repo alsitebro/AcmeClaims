@@ -8,6 +8,7 @@ open System.Text
 open Microsoft.AspNetCore.Http
 open Twilio.Security
 
+// Twilio signature validation for webhook security https://www.twilio.com/docs/usage/webhooks/webhooks-security#validating-signatures-from-twilio
 type TwilioSignatureValidator (options: TwilioOptions) =
     // value bindings using let represent private fields. member values are used to define public values and methods
     // 'let' and 'do' bindings must come before member and interface definitions in type definitions

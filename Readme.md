@@ -31,11 +31,19 @@ This demo was used in my presentation at Peterborough .NET 23rd August 2022
 
 > [TwiML™ for Programmable Voice](https://www.twilio.com/docs/voice/twiml)
 
+> [Twilio signature validation for webhook security] (https://www.twilio.com/docs/usage/webhooks/webhooks-security#validating-signatures-from-twilio)
+
 > [Twilio SDK for .NET](https://www.nuget.org/packages/Twilio)
 
 > [ASP.NET Core Libraries for the Twilio SDK](https://www.nuget.org/packages/Twilio.AspNet.Core)
 
-Install packages via dotnet CLI
+> Git repositories
+
+[Twilio ASP.NET Core](https://github.com/twilio-labs/twilio-aspnet)
+
+[Twilio SDK](https://github.com/twilio/twilio-csharp)
+
+> Install packages via dotnet CLI
 
 dotnet add package Twilio --version 5.78.1
 
