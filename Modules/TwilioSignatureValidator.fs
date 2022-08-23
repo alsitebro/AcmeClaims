@@ -6,9 +6,7 @@ open System.IO
 open System.Linq
 open System.Text
 open Microsoft.AspNetCore.Http
-open Microsoft.Extensions.Primitives
 open Twilio.Security
-open Microsoft.Extensions.Logging
 
 type TwilioSignatureValidator (options: TwilioOptions) =
     // value bindings using let represent private fields. member values are used to define public values and methods

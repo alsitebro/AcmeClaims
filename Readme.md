@@ -1,25 +1,42 @@
 # Programmable Voice Demo
-This project is a sample ASP.NET Core minimal API application
+This project is a ASP.NET Core API application written in F#
 
 It demonstrates the implementaton of a simple Intelligent Voice Routing (IVR) service which handles requests from the Twilio Programmable Voice platform by returning responses containing TwiML instructions.
+
+This application was implemented using the Twilio SDK for .NET
+
+This demo was used in my presentation at Peterborough .NET 23rd August 2022
 
 ## Routes
 > POST claims/start
 
-> POST claims/gather/option
-
-> POST claims/gather/account
+> POST claims/options
 
 > POST claims/fail
 
-> POST claims/redirect/underwriter
+> POST claims/underwriter
 
 > POST claims/complete
 
-> POST identity/gather/account
-
-> POST identity/gather/postcode
+> POST identity/account
 
 > POST identity/fail
 
 > POST identity/verify
+
+##  Resources
+> [Twilio Programmable Voice Documentation](https://www.twilio.com/docs/voice)
+
+> [Programmable Voice Quickstart for C# / .NET](https://www.twilio.com/docs/voice/quickstart/csharp)
+
+> [TwiML™ for Programmable Voice](https://www.twilio.com/docs/voice/twiml)
+
+> [Twilio SDK for .NET](https://www.nuget.org/packages/Twilio)
+
+> [ASP.NET Core Libraries for the Twilio SDK](https://www.nuget.org/packages/Twilio.AspNet.Core)
+
+Install packages via dotnet CLI
+
+dotnet add package Twilio --version 5.78.1
+
+dotnet add package Twilio.AspNet.Core --version 6.0.0

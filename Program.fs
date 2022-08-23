@@ -1,4 +1,7 @@
 namespace AcmeClaims
+
+open MongoDB.Driver
+
 #nowarn "20"
 open Microsoft.AspNetCore.Builder
 open Microsoft.Extensions.Configuration
@@ -24,13 +27,14 @@ module Program =
         builder.Configuration.GetSection("Twilio").Bind(twilioOptions)
         builder.Services.AddScoped<TwilioOptions>(fun sp -> twilioOptions)
         builder.Services.AddScoped<TwilioSignatureValidator>()
+        let mongoDbOptions = new MongoDBOptions()
+        builder.Configuration.GetSection("MongoDB").Bind(mongoDbOptions)
+        builder.Services.AddScoped<IMongoDatabase>(fun sp -> MongoClient(connectionString = mongoDbOptions.ConnectionString).GetDatabase("acme_claims"))
 
         let app = builder.Build()
         
-        //if app.Environment.IsDevelopment() = true then 
-        //    app.UseSwagger().UseSwaggerUI() |> ignore
-
-        app.UseSwagger().UseSwaggerUI() |> ignore
+        if app.Environment.IsDevelopment() = true then 
+            app.UseSwagger().UseSwaggerUI() |> ignore
 
 
         app.Use(Middleware.requestLogger)
