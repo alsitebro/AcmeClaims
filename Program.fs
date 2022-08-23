@@ -4,6 +4,7 @@ open Microsoft.AspNetCore.Builder
 open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Hosting
+open Microsoft.Extensions.Logging.ApplicationInsights
 
 module Program =
     let exitCode = 0
@@ -16,7 +17,7 @@ module Program =
         builder.Services.AddControllers()
         builder.Services.AddEndpointsApiExplorer()
         builder.Services.AddSwaggerGen()
-        
+        builder.Services.AddApplicationInsightsTelemetry()
         builder.Services.AddMemoryCache()
 
         let twilioOptions = new TwilioOptions()
@@ -26,8 +27,10 @@ module Program =
 
         let app = builder.Build()
         
-        if app.Environment.IsDevelopment() = true then 
-            app.UseSwagger().UseSwaggerUI() |> ignore
+        //if app.Environment.IsDevelopment() = true then 
+        //    app.UseSwagger().UseSwaggerUI() |> ignore
+
+        app.UseSwagger().UseSwaggerUI() |> ignore
 
 
         app.Use(Middleware.requestLogger)

@@ -8,6 +8,7 @@ open System.Text
 open Microsoft.AspNetCore.Http
 open Microsoft.Extensions.Primitives
 open Twilio.Security
+open Microsoft.Extensions.Logging
 
 type TwilioSignatureValidator (options: TwilioOptions) =
     // value bindings using let represent private fields. member values are used to define public values and methods
@@ -35,14 +36,14 @@ type TwilioSignatureValidator (options: TwilioOptions) =
         if Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") = "Development" then
             true
         else
-            let mutable signature = StringValues()
-            let hasSignature = request.Headers.TryGetValue ("X-Twilio-Signature", ref signature)
-            let contentType = request.Headers.ContentType.[0]
-            if contentType = "application/x-www-form-urlencoded" then
+            let headers : IDictionary<string, string> = request.Headers.ToDictionary((fun h -> h.Key.ToLower()), (fun e -> e.Value.[0]))
+            let signature = headers.["x-twilio-signature"]
+            let contentType = headers.["content-type"]
+            if contentType.Contains("application/x-www-form-urlencoded") then
                 let url: string = BuildUrl (request.Scheme, request.Host, request.Path, request.QueryString)
                 let parameters: IDictionary<string, string> = ToOrderedDictionary request.Form
-                hasSignature && validator.Validate (url, parameters, signature.[0])
-            else if contentType = "application/json" && request.Query.ContainsKey("bodySHA256") then
+                validator.Validate (url, parameters, signature)
+            else if contentType.Contains("application/json") && request.Query.ContainsKey("bodySHA256") then
                 let url: string = BuildUrl (request.Scheme, request.Host, request.Path, request.QueryString)
                 let requestBody: string = ReadBody request
                 validator.Validate (url, requestBody, signature)

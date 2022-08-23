@@ -1,5 +1,7 @@
 obj/
 bin/
+[Pp]roperties/PublishProfiles/*
+#[Pp]roperties/ServiceDependencies/*
 .vscode/
 .vs/
 .idea/
@@ -14,5 +16,4 @@ deploy.ps1
 DOCKERFILE
 .dockerignore
 customers.json
-
 !appsettings.example.json

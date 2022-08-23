@@ -5,4 +5,6 @@ type SessionModel = {
     From:string
     AccountNumber:string
     PostCode:string
+    Retries:int
+    Option:string
 }
